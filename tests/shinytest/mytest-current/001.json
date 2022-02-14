@@ -1,0 +1,491 @@
+{
+  "input": {
+    ".clientValue-default-plotlyCrosstalkOpts": {
+      "on": "plotly_click",
+      "persistent": false,
+      "dynamic": false,
+      "selectize": false,
+      "opacityDim": 0.2,
+      "selected": {
+        "opacity": 1
+      },
+      "debounce": 0,
+      "color": [
+
+      ]
+    },
+    "plotly_afterplot-A": "\"total_order_view-plotOutput\"",
+    "plotly_relayout-A": "{\"width\":204,\"height\":400}",
+    "sidebarCollapsed": false,
+    "sidebarItemExpanded": null,
+    "tabs": "orderTab",
+    "total_order_view-currencyInput": "EUR",
+    "total_order_view-orderOutput_cell_clicked": {
+
+    },
+    "total_order_view-orderOutput_cells_selected": [
+
+    ],
+    "total_order_view-orderOutput_columns_selected": null,
+    "total_order_view-orderOutput_rows_all": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_order_view-orderOutput_rows_current": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_order_view-orderOutput_rows_selected": null,
+    "total_order_view-orderOutput_search": "",
+    "total_order_view-orderOutput_state": {
+      "time": 1644808184799,
+      "start": 0,
+      "length": 5,
+      "order": [
+
+      ],
+      "search": {
+        "search": "",
+        "smart": true,
+        "regex": false,
+        "caseInsensitive": true
+      },
+      "columns": [
+        {
+          "visible": true,
+          "search": {
+            "search": "",
+            "smart": true,
+            "regex": false,
+            "caseInsensitive": true
+          }
+        },
+        {
+          "visible": true,
+          "search": {
+            "search": "",
+            "smart": true,
+            "regex": false,
+            "caseInsensitive": true
+          }
+        },
+        {
+          "visible": true,
+          "search": {
+            "search": "",
+            "smart": true,
+            "regex": false,
+            "caseInsensitive": true
+          }
+        }
+      ]
+    }
+  },
+  "output": {
+    "total_order_view-orderOutput": {
+      "x": {
+        "filter": "none",
+        "vertical": false,
+        "container": "<table class=\"display\">\n  <thead>\n    <tr>\n      <th>product<\/th>\n      <th>price_EUR<\/th>\n      <th>price_USD<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>",
+        "options": {
+          "pageLength": 5,
+          "columnDefs": [
+            {
+              "className": "dt-right",
+              "targets": [
+                1,
+                2
+              ]
+            }
+          ],
+          "order": [
+
+          ],
+          "autoWidth": false,
+          "orderClasses": false,
+          "lengthMenu": [
+            5,
+            10,
+            25,
+            50,
+            100
+          ],
+          "ajax": {
+            "type": "POST",
+            "data": "function(d) {\nd.search.caseInsensitive = true;\nd.search.smart = true;\nd.escape = true;\nvar encodeAmp = function(x) { x.value = x.value.replace(/&/g, \"%26\"); }\nencodeAmp(d.search);\n$.each(d.columns, function(i, v) {encodeAmp(v.search);});\n}"
+          },
+          "serverSide": true,
+          "processing": true
+        },
+        "selection": {
+          "mode": "multiple",
+          "selected": null,
+          "target": "row",
+          "selectable": null
+        }
+      },
+      "evals": [
+        "options.ajax.data"
+      ],
+      "jsHooks": [
+
+      ],
+      "deps": [
+        {
+          "name": "jquery",
+          "version": "3.6.0",
+          "src": {
+            "href": "jquery-3.6.0"
+          },
+          "meta": null,
+          "script": "jquery-3.6.0.min.js",
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        },
+        {
+          "name": "dt-core",
+          "version": "1.11.3",
+          "src": {
+            "href": "dt-core-1.11.3"
+          },
+          "meta": null,
+          "script": "js/jquery.dataTables.min.js",
+          "stylesheet": [
+            "css/jquery.dataTables.min.css",
+            "css/jquery.dataTables.extra.css"
+          ],
+          "head": null,
+          "attachment": null,
+          "package": null,
+          "all_files": false
+        },
+        {
+          "name": "crosstalk",
+          "version": "1.2.0",
+          "src": {
+            "href": "crosstalk-1.2.0"
+          },
+          "meta": null,
+          "script": "js/crosstalk.min.js",
+          "stylesheet": "css/crosstalk.min.css",
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        }
+      ]
+    },
+    "total_order_view-plotOutput": {
+      "x": {
+        "layout": {
+          "margin": {
+            "b": 40,
+            "l": 60,
+            "t": 25,
+            "r": 10
+          },
+          "title": "Total order",
+          "xaxis": {
+            "domain": [
+              0,
+              1
+            ],
+            "automargin": true,
+            "title": "Product",
+            "type": "category",
+            "categoryorder": "array",
+            "categoryarray": [
+              "headphones",
+              "laptop",
+              "monitor",
+              "printer",
+              "smartwatch"
+            ]
+          },
+          "yaxis": {
+            "domain": [
+              0,
+              1
+            ],
+            "automargin": true,
+            "title": "Order Price in EUR"
+          },
+          "hovermode": "closest",
+          "showlegend": true
+        },
+        "source": "A",
+        "config": {
+          "modeBarButtonsToAdd": [
+            "hoverclosest",
+            "hovercompare"
+          ],
+          "showSendToCloud": false
+        },
+        "data": [
+          {
+            "x": "headphones",
+            "y": 173,
+            "type": "bar",
+            "name": "headphones",
+            "marker": {
+              "color": "rgba(102,194,165,1)",
+              "line": {
+                "color": "rgba(102,194,165,1)"
+              }
+            },
+            "textfont": {
+              "color": "rgba(102,194,165,1)"
+            },
+            "error_y": {
+              "color": "rgba(102,194,165,1)"
+            },
+            "error_x": {
+              "color": "rgba(102,194,165,1)"
+            },
+            "xaxis": "x",
+            "yaxis": "y",
+            "frame": null
+          },
+          {
+            "x": "laptop",
+            "y": 517,
+            "type": "bar",
+            "name": "laptop",
+            "marker": {
+              "color": "rgba(252,141,98,1)",
+              "line": {
+                "color": "rgba(252,141,98,1)"
+              }
+            },
+            "textfont": {
+              "color": "rgba(252,141,98,1)"
+            },
+            "error_y": {
+              "color": "rgba(252,141,98,1)"
+            },
+            "error_x": {
+              "color": "rgba(252,141,98,1)"
+            },
+            "xaxis": "x",
+            "yaxis": "y",
+            "frame": null
+          },
+          {
+            "x": "monitor",
+            "y": 279,
+            "type": "bar",
+            "name": "monitor",
+            "marker": {
+              "color": "rgba(141,160,203,1)",
+              "line": {
+                "color": "rgba(141,160,203,1)"
+              }
+            },
+            "textfont": {
+              "color": "rgba(141,160,203,1)"
+            },
+            "error_y": {
+              "color": "rgba(141,160,203,1)"
+            },
+            "error_x": {
+              "color": "rgba(141,160,203,1)"
+            },
+            "xaxis": "x",
+            "yaxis": "y",
+            "frame": null
+          },
+          {
+            "x": "printer",
+            "y": 110,
+            "type": "bar",
+            "name": "printer",
+            "marker": {
+              "color": "rgba(231,138,195,1)",
+              "line": {
+                "color": "rgba(231,138,195,1)"
+              }
+            },
+            "textfont": {
+              "color": "rgba(231,138,195,1)"
+            },
+            "error_y": {
+              "color": "rgba(231,138,195,1)"
+            },
+            "error_x": {
+              "color": "rgba(231,138,195,1)"
+            },
+            "xaxis": "x",
+            "yaxis": "y",
+            "frame": null
+          },
+          {
+            "x": "smartwatch",
+            "y": 217,
+            "type": "bar",
+            "name": "smartwatch",
+            "marker": {
+              "color": "rgba(166,216,84,1)",
+              "line": {
+                "color": "rgba(166,216,84,1)"
+              }
+            },
+            "textfont": {
+              "color": "rgba(166,216,84,1)"
+            },
+            "error_y": {
+              "color": "rgba(166,216,84,1)"
+            },
+            "error_x": {
+              "color": "rgba(166,216,84,1)"
+            },
+            "xaxis": "x",
+            "yaxis": "y",
+            "frame": null
+          }
+        ],
+        "highlight": {
+          "on": "plotly_click",
+          "persistent": false,
+          "dynamic": false,
+          "selectize": false,
+          "opacityDim": 0.2,
+          "selected": {
+            "opacity": 1
+          },
+          "debounce": 0
+        },
+        "shinyEvents": [
+          "plotly_hover",
+          "plotly_click",
+          "plotly_selected",
+          "plotly_relayout",
+          "plotly_brushed",
+          "plotly_brushing",
+          "plotly_clickannotation",
+          "plotly_doubleclick",
+          "plotly_deselect",
+          "plotly_afterplot",
+          "plotly_sunburstclick"
+        ],
+        "base_url": "https://plot.ly"
+      },
+      "evals": [
+
+      ],
+      "jsHooks": [
+
+      ],
+      "deps": [
+        {
+          "name": "setprototypeof",
+          "version": "0.1",
+          "src": {
+            "href": "setprototypeof-0.1"
+          },
+          "meta": null,
+          "script": "setprototypeof.js",
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": false
+        },
+        {
+          "name": "typedarray",
+          "version": "0.1",
+          "src": {
+            "href": "typedarray-0.1"
+          },
+          "meta": null,
+          "script": "typedarray.min.js",
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": false
+        },
+        {
+          "name": "jquery",
+          "version": "3.5.1",
+          "src": {
+            "href": "jquery-3.5.1"
+          },
+          "meta": null,
+          "script": "jquery.min.js",
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        },
+        {
+          "name": "crosstalk",
+          "version": "1.2.0",
+          "src": {
+            "href": "crosstalk-1.2.0"
+          },
+          "meta": null,
+          "script": "js/crosstalk.min.js",
+          "stylesheet": "css/crosstalk.min.css",
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        },
+        {
+          "name": "plotly-htmlwidgets-css",
+          "version": "2.5.1",
+          "src": {
+            "href": "plotly-htmlwidgets-css-2.5.1"
+          },
+          "meta": null,
+          "script": null,
+          "stylesheet": "plotly-htmlwidgets.css",
+          "head": null,
+          "attachment": null,
+          "all_files": false
+        },
+        {
+          "name": "plotly-main",
+          "version": "2.5.1",
+          "src": {
+            "href": "plotly-main-2.5.1"
+          },
+          "meta": null,
+          "script": "plotly-latest.min.js",
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": false
+        }
+      ]
+    },
+    "total_order_view-totalPriceOutput": {
+      "html": "<div class=\"small-box bg-green\">\n  <div class=\"inner\">\n    <h3>1036.8<\/h3>\n    <p>Total Price<\/p>\n  <\/div>\n  <div class=\"icon-large\">\n    <i class=\"fa fa-euro-sign\" role=\"presentation\" aria-label=\"euro-sign icon\"><\/i>\n  <\/div>\n<\/div>",
+      "deps": [
+        {
+          "name": "font-awesome",
+          "version": "5.15.3",
+          "src": {
+            "href": "font-awesome-5.15.3"
+          },
+          "meta": null,
+          "script": null,
+          "stylesheet": [
+            "css/all.min.css",
+            "css/v4-shims.min.css"
+          ],
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        }
+      ]
+    }
+  },
+  "export": {
+
+  }
+}
