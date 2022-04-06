@@ -43,5 +43,6 @@ total_price <- function(data, currency = "EUR"){
   discount <- ifelse(Sys.Date() == as.Date(discount_date), 0.5, discount)
   order_currency_column <- data %>% dplyr::select(paste0("price_", currency))
   total <- sum(order_currency_column) * (1 - discount)
+  total <- format(round(total,2), nsmall = 2)
   return(total)
 }

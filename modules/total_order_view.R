@@ -8,10 +8,13 @@ import(DT)
 import(magrittr)
 import(dashboardthemes)
 import(modules)
-import(plotly)
+import(ggplot2)
+import(scales)
 import(shiny)
 import(shinydashboard)
 import(shiny.fluent)
+
+options = as.list(c("a","b",HTML("&#8364;"),"€"))
 
 ui <- function(id) {
   ns <- NS(id)
@@ -27,17 +30,18 @@ ui <- function(id) {
   ),
   fluidRow(
     box(
-      title = "Order",
-      solidHeader = T,
+      solidHeader = F,
       width = 4,
-      collapsible = T,
-      DT::DTOutput(ns("orderOutput"))
+      collapsible = F,
+      background = "purple",
+      plotOutput(ns("plotOutput"))
     ),
     box(
+      title = NULL,
       solidHeader = T,
       width = 4,
-      collapsible = T,
-      plotlyOutput(ns("plotOutput"))
+      collapsible = F,
+      DT::DTOutput(ns("orderOutput"))
     )
   ))
 }
@@ -48,33 +52,64 @@ init_server <- function(id) {
 
 server <- function(input, output, session, id) {
   ns <- session$ns
+
+  #### Load mockup data ####
   load("data/datamockupData.RData")
 
-  # Reactive value to choose the icon for the currency
+  #### Reactive Icon value to choose the icon for the currency ####
   moneyIconReac <- reactive({
     return(ifelse(input$currencyInput == "EUR", "euro-sign", "dollar-sign"))
   })
 
-  plotReac <- reactive({
-    currencySelected <- ifelse(input$currencyInput == "EUR","price_EUR", "price_USD")
-    orderTest <- orderData %>% select(currencySelected)
-    plot <- plot_ly(orderData,
-                    x = ~product,
-                    y = ~orderData[[currencySelected]],
-                    type = "bar",
-                    color = ~product)
+  #### Reactive Currency column name (price_EUR, price_USD) selected ####
+  # return: String
+  currencyColumn <- reactive({
+    return(ifelse(input$currencyInput == "EUR","price_EUR", "price_USD"))
+  })
 
-    plot <- plot %>%
-      layout(title = "Total order",
-             xaxis = list(title = "Product"),
-             yaxis = list(title = paste0("Order Price in ", input$currencyInput)))
+  #### Reactive data ordered by currency input ####
+  # return: Data
+  ascData <- reactive({
+    orderData$product <- factor(orderData$product,
+                                levels = unique(orderData$product)[order(orderData[[currencyColumn()]],
+                                                                         decreasing = FALSE)])
+    descData <- orderData[order(orderData[[currencyColumn()]], decreasing = TRUE), ]
+    return(descData)
+  })
+
+
+  #### Reactive barplot ####
+  plotReac <- reactive({
+
+    cols <- hue_pal()(length(levels(factor(orderData$product))))
+
+    plot <- ascData() %>%
+      ggplot(aes(product,.data[[currencyColumn()]]))+
+      geom_col() +
+      geom_text(aes(label= paste0(ifelse(input$currencyInput == "EUR",
+                                        "\u20ac",
+                                        "$"),.data[[currencyColumn()]])),
+                vjust=-0.3, size= 5) +
+      aes(fill = product) +
+      scale_fill_manual(values = rev(cols)) +
+      scale_y_continuous(labels = ifelse(input$currencyInput == "EUR",
+                                         dollar_format(suffix = "", prefix = "\u20ac"),
+                                         dollar_format())) +
+      labs(x = NULL,
+           y = NULL) +
+      theme_minimal() +
+      theme(panel.grid = element_blank(), legend.position = "none",
+            axis.text.y=element_blank(),
+            text = element_text(size = 20))
+
     return(plot)
   })
 
-  output$orderOutput <- DT::renderDataTable(orderData, rownames=F, options = list(pageLength = 5))
+  #### Table Output - order table ####
+  output$orderOutput <- DT::renderDataTable(ascData(), rownames=F, options = list(pageLength = 5))
 
 
-  #### Total Order Output ####
+  #### Value Box Output - Total Order ####
   output$totalPriceOutput <- renderValueBox({
     valueBox(as.character(total_price$total_price(orderData, input$currencyInput)),
              "Total Price",
@@ -83,5 +118,5 @@ server <- function(input, output, session, id) {
   })
 
   #### Plot Output ###
-  output$plotOutput <- renderPlotly({plotReac()})
+  output$plotOutput <- renderPlot({plotReac()})
 }

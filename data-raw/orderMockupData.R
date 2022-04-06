@@ -13,3 +13,4 @@ orderNaData <- data.frame(product, price_EUR, price_USD)
 orderMissingColumnData <- data.frame(product, price_USD)
 
 save(orderNaData, orderMissingColumnData, orderData, file = "D:/RandShiny/coding_exercise/shiny-unit/shiny-order-unit/data/datamockupData.RData")
+
